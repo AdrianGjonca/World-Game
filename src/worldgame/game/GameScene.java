@@ -42,7 +42,7 @@ public class GameScene extends SceneThread {
 		under_map = new LightMap();
 		over_map = new LightMap();
 		over_map.ambient = 1;
-		under_map.ambient = 0.02f;
+		under_map.ambient = 0.25f;
 		
 		g2 = ground.createGraphics();
 		

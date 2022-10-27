@@ -32,7 +32,7 @@ public class LinkItemNameToIcon {
 		}else if(name.equals("Coal")) {
 			return coal;
 		}else if(name.equals("Torch")) {
-			return coal;
+			return torch;
 		}
 		return null;
 	}
