@@ -64,6 +64,5 @@ public class FoliageTick {
 			firstTime = false;
 		}
 
-		System.out.println(air_count + " - " + tree_count);
 	}
 }

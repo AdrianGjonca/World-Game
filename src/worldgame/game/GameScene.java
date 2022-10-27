@@ -13,6 +13,7 @@ import worldgame.game.rendering.ParticleManager;
 import worldgame.game.rendering.ScreenSpace;
 import worldgame.game.rendering.TextGraphics;
 import worldgame.game.rendering.WorldSpace;
+import worldgame.game.rendering.lighting.LightMap;
 
 public class GameScene extends SceneThread {
 
@@ -30,12 +31,19 @@ public class GameScene extends SceneThread {
 	BufferedImage destroy_cursor;
 	BufferedImage selectedBlockUI;
 	
+	LightMap under_map;
+	LightMap over_map;
 	public GameScene(Graphics image_graphics, GamePortal portal, World world, GameEventController controller) {
 		super(image_graphics, portal);
 		controller.scene = this;
 		this.world = world;
 		position = new WorldSpace();
 		ground = new BufferedImage(240, 144, BufferedImage.TYPE_INT_RGB);
+		under_map = new LightMap();
+		over_map = new LightMap();
+		over_map.ambient = 1;
+		under_map.ambient = 0.02f;
+		
 		g2 = ground.createGraphics();
 		
 		playersprite = ResourceLoader.retrieveTileset(ResourceLoader.easyLoad("/Player.png"));
@@ -49,9 +57,15 @@ public class GameScene extends SceneThread {
 		particles = new ParticleManager(world, position);
 	}
 
+	long next = 0;
 	@Override
 	public void update(float deltaTime, Graphics g) {
-		//System.out.println(1f/deltaTime);
+		if(System.currentTimeMillis() > next) {
+			under_map.process(world.underground);
+			over_map.process(world.overground);
+			next = System.currentTimeMillis() + 1000;
+		}
+		System.out.println(1f/deltaTime);
 		controller.update();
 		if(position.camx < world.player_x) position.camx += deltaTime * 2f + (Math.abs(position.camx - world.player_x) * 0.05f);
 		if(position.camx > world.player_x) position.camx -= deltaTime * 2f + (Math.abs(position.camx - world.player_x) * 0.05f);
@@ -121,7 +135,9 @@ public class GameScene extends SceneThread {
 	public void drawBlocks() {
 		for(int x = world.player_x - 8; x<world.player_x + 9; x++) {
 			for(int y = world.player_y - 5; y<world.player_y + 6; y++) {
-				BlockRendering.drawBlock(g2, position, world, x, y);
+				LightMap map = under_map;
+				if(world.dimention == 0) map = over_map;
+				BlockRendering.drawBlock(g2, position, world,map,  x, y);
 			}
 		}
 	}

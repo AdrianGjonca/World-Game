@@ -6,24 +6,22 @@ import worldgame.engine.resourcecontroll.ResourceLoader;
 import worldgame.game.block.Block;
 import worldgame.game.rendering.lighting.LightingGrader;
 
-public class Wood extends Block {
+public class Torch extends Block {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return "Wood";
+		return "Torch";
 	}
 
 	@Override
 	public String getDrop() {
-		// TODO Auto-generated method stub
-		return "Wood";
+		return "Torch";
 	}
 
 	@Override
 	public BufferedImage getTexture(int noise, int dimention, char airspace, float lighting) {
-		return LightingGrader.graded(Wood, lighting);
+		return LightingGrader.graded(Torch, lighting);
 	}
 
-	public static BufferedImage Wood = ResourceLoader.easyLoad("/Textures/Wood.png");
+	public static BufferedImage Torch = ResourceLoader.easyLoad("/Textures/Torch/Torch.png");
 }

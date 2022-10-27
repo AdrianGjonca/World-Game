@@ -15,6 +15,15 @@ public class Inventory {
 		
 	}
 	
+	public boolean contains(String type) {
+		for(ItemStack stack : items) {
+			if(stack.type.equals(type)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public boolean hasSpace(char block) {
 		String name = BlockTypeManager.blocks[(int) block].getDrop();
 		boolean space = false;

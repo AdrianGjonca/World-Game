@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 
 import worldgame.engine.resourcecontroll.ResourceLoader;
 import worldgame.game.block.Block;
+import worldgame.game.rendering.lighting.LightingGrader;
 
 public class Air extends Block {
 
@@ -18,22 +19,22 @@ public class Air extends Block {
 	}
 
 	@Override
-	public BufferedImage getTexture(int noise, int dimention, char airspace) {
+	public BufferedImage getTexture(int noise, int dimention, char airspace, float lighting) {
 		noise = noise >> 5;
 		switch (dimention) {
 			case 0:
 				if(noise == 4) {
-					return Air_Grass_VarA;
+					return LightingGrader.graded(Air_Grass_Base, lighting);
 				}else if(noise == 3) {
-					return Air_Grass_VarB;
+					return LightingGrader.graded(Air_Grass_VarB, lighting);
 				}else {
-					return Air_Grass_Base;
+					return LightingGrader.graded(Air_Grass_Base, lighting);
 				}
 			case 1:
 				if(noise == 0) {
-					return Air_Stone_VarA;
+					return LightingGrader.graded(Air_Stone_VarA, lighting);
 				}else {
-					return Air_Stone_Base;
+					return LightingGrader.graded(Air_Stone_Base, lighting);
 				}
 		}
 		return null; 

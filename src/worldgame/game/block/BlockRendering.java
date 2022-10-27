@@ -6,11 +6,12 @@ import java.awt.image.BufferedImage;
 import worldgame.engine.resourcecontroll.ResourceLoader;
 import worldgame.game.World;
 import worldgame.game.rendering.WorldSpace;
+import worldgame.game.rendering.lighting.LightMap;
 
 public class BlockRendering {
 	
 	static int noise;
-	public static void drawBlock(Graphics g, WorldSpace worldspace, World world, int x, int y) {
+	public static void drawBlock(Graphics g, WorldSpace worldspace, World world,LightMap map, int x, int y) {
 		int block_id = world.world.grid[x][y];
 		noise = world.world.noise_map[x % 256][ y % 256] + 128;
 		
@@ -30,9 +31,9 @@ public class BlockRendering {
 				airspace += 0b0001;
 			}
 			
-			img = BlockTypeManager.blocks[block_id].getTexture(noise, world.dimention, airspace);
+			img = BlockTypeManager.blocks[block_id].getTexture(noise, world.dimention, airspace, map.lightMap[x][y]);
 		}else {
-			img = BlockTypeManager.blocks[block_id].getTexture(noise, world.dimention, (char) 0);
+			img = BlockTypeManager.blocks[block_id].getTexture(noise, world.dimention, (char) 0,  1);
 		}
 		
 		

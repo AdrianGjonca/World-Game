@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import worldgame.engine.core.IndividualInputObj;
 import worldgame.engine.core.InputReadyFrame;
 import worldgame.game.block.BlockTypeManager;
+import worldgame.game.foliage.FoliageThread;
 import worldgame.game.foliage.FoliageTick;
 import worldgame.game.particles.DestroyParticle;
 import worldgame.game.particles.ErrorParticle;
@@ -34,6 +35,9 @@ public class GameEventController {
 		this.frame = frame;
 		this.world = world;
 		this.inventory = inventory;
+		
+		FoliageThread t = new FoliageThread(world);
+		t.start();
 		
 		IndividualInputObj left = new IndividualInputObj(KeyEvent.VK_A);
 		frame.listened_to_buttons.add(left);
@@ -93,14 +97,7 @@ public class GameEventController {
 	public long lastTimeReleased = 0;
 	public long lastTimePressed = 0;
 	
-	long nextFoliageTick = 0;
 	public void update() {
-		
-		if(System.currentTimeMillis() > nextFoliageTick) {
-			FoliageTick.update(world.overground);
-			nextFoliageTick = System.currentTimeMillis() + 1000 * 10;
-			System.out.println("tree");
-		}
 		if(upArrow.hasBeenPressed && upArrow.held && upArrow.hasBeenReleased) {
 			if(inventory.selected > 0) {
 				inventory.selected--;

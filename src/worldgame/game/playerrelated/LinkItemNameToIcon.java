@@ -3,6 +3,7 @@ package worldgame.game.playerrelated;
 import java.awt.image.BufferedImage;
 
 import worldgame.engine.resourcecontroll.ResourceLoader;
+import worldgame.game.block.BlockTypeManager;
 
 public class LinkItemNameToIcon {
 	private static BufferedImage mini(String loc) {
@@ -18,16 +19,20 @@ public class LinkItemNameToIcon {
 	public static BufferedImage leaves = mini("/Textures/Leaves.png");
 	public static BufferedImage stone = mini("/Textures/Stone.png");
 	public static BufferedImage wood = mini("/Textures/Wood.png");
+	public static BufferedImage coal = mini("/Textures/Coal/Coal.png");
+	public static BufferedImage torch = mini("/Textures/Torch/Torch.png");
 	
 	public static BufferedImage icon(String name) {
 		if(name.equals("Leaves")) {
 			return leaves;
-		}
-		if(name.equals("Stone")) {
+		}else if(name.equals("Stone")) {
 			return stone;
-		}
-		if(name.equals("Wood")) {
+		}else if(name.equals("Wood")) {
 			return wood;
+		}else if(name.equals("Coal")) {
+			return coal;
+		}else if(name.equals("Torch")) {
+			return coal;
 		}
 		return null;
 	}
