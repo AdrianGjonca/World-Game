@@ -247,6 +247,7 @@ public class InventoryScene extends SceneThread {
 		}
 	}
 	void drawInventory(float deltaTime, Graphics g) {
+		System.out.println("Inv");
 		g.drawImage(inventoryBackground, 0, 0, null);
 		int i = 0;
 		for(ItemStack item : inventory.items) {
@@ -260,6 +261,7 @@ public class InventoryScene extends SceneThread {
 	}
 	
 	void drawCrafting(float deltaTime, Graphics g) {
+		System.out.println("InvC");
 		g.drawImage(inventoryCraftBackground, 0, 0, null);
 	}
 

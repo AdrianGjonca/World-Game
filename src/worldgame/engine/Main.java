@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 
 import worldgame.engine.core.IndividualInputObj;
 import worldgame.engine.core.threading.GamePortal;
+import worldgame.engine.core.threading.SceneManager;
 import worldgame.game.GameEventController;
 import worldgame.game.GameScene;
 import worldgame.game.World;
@@ -15,6 +16,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		GamePortal port = new GamePortal("Title", 240, 144);
+		
+		SceneManager scene_manager = new SceneManager();
+		
 		World world = new World();		
 		Inventory inventory = new Inventory();
 		GenWorld.generateWorld(world);
@@ -22,13 +26,11 @@ public class Main {
 		GameScene game = new GameScene(port.image_g, port, world, ev);
 		InventoryScene inventscene = new InventoryScene(port.image_g, port, inventory);
 		IndividualInputObj itemsIn = new IndividualInputObj(KeyEvent.VK_I);
-		//itemsIn.hasBeenReleased = true;
 		port.portal_window.listened_to_buttons.add(itemsIn);
 		
-		inventscene.initThread();
-		
-		game.initThread();
-		game.play();
+		scene_manager.initThread();
+		scene_manager.active_scene = game;
+		scene_manager.play();
 		
 		boolean inInventory = false;
 		while(true) {
@@ -36,11 +38,9 @@ public class Main {
 				inInventory = !inInventory;
 				
 				if(inInventory) {
-					game.pause();
-					inventscene.play();
+					scene_manager.active_scene = inventscene;
 				}else {
-					inventscene.pause();
-					game.play();
+					scene_manager.active_scene = game;
 				}
 				itemsIn.hasBeenReleased = false;
 				itemsIn.hasBeenPressed = false;
