@@ -1,5 +1,7 @@
 package worldgame.game;
 
+import worldgame.game.block.BlockTypeManager;
+
 public class World {
 	public LevelGrid world;
 	public LevelGrid underground;
@@ -26,6 +28,6 @@ public class World {
 	}
 	
 	public boolean checkGround(int x, int y) {
-		return world.grid[x][y] == 0;
+		return BlockTypeManager.blocks[world.grid[x][y]].getTraversable();
 	}
 }

@@ -17,9 +17,14 @@ public class Coal extends Block {
 	public String getDrop() {
 		return "Coal";
 	}
-	
+	@Override
 	public boolean getTransparency() {
 		return true;
+	}
+	
+	@Override
+	public boolean getTraversable() {
+		return false;
 	}
 	
 	@Override

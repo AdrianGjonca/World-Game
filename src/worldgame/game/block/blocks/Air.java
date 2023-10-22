@@ -18,10 +18,16 @@ public class Air extends Block {
 		return null;
 	}
 	
+	@Override
 	public boolean getTransparency() {
 		return true;
 	}
 
+	@Override
+	public boolean getTraversable() {
+		return true;
+	}
+	
 	@Override
 	public BufferedImage getTexture(int noise, int dimention, char airspace, float lighting) {
 		noise = noise >> 5;
@@ -49,5 +55,6 @@ public class Air extends Block {
 	public static BufferedImage Air_Grass_VarB = ResourceLoader.easyLoad("/Textures/Air_Grass/VarB.png");
 	public static BufferedImage Air_Stone_Base = ResourceLoader.easyLoad("/Textures/Air_Stone/Base.png");
 	public static BufferedImage Air_Stone_VarA = ResourceLoader.easyLoad("/Textures/Air_Stone/VarA.png");
+	
 
 }

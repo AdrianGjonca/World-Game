@@ -16,6 +16,15 @@ public class LinkItemNameToIcon {
 		}
 		return after;
 	}
+	private static BufferedImage mini(BufferedImage big) {
+		BufferedImage after = new BufferedImage(8, 8, BufferedImage.TYPE_INT_ARGB);
+		for(int x = 0; x < 8; x ++) {
+			for(int y = 0; y < 8; y ++) {
+				after.setRGB(x, y, big.getRGB(x*2, y*2));
+			}
+		}
+		return after;
+	}
 	public static BufferedImage leaves = mini("/Textures/Leaves.png");
 	public static BufferedImage stone = mini("/Textures/Stone.png");
 	public static BufferedImage wood = mini("/Textures/Wood.png");
@@ -23,18 +32,7 @@ public class LinkItemNameToIcon {
 	public static BufferedImage torch = mini("/Textures/Torch/Torch.png");
 	
 	public static BufferedImage icon(String name) {
-		if(name.equals("Leaves")) {
-			return leaves;
-		}else if(name.equals("Stone")) {
-			return stone;
-		}else if(name.equals("Wood")) {
-			return wood;
-		}else if(name.equals("Coal")) {
-			return coal;
-		}else if(name.equals("Torch")) {
-			return torch;
-		}
-		return null;
+		return mini(BlockTypeManager.blocks[BlockTypeManager.getBlockChar(name)].getTexture(0, 0, (char) 0, 1f));
 	}
 	
 	

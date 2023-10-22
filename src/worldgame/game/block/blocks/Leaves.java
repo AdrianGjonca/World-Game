@@ -18,8 +18,14 @@ public class Leaves extends Block {
 		return "Leaves";
 	}
 	
+	@Override
 	public boolean getTransparency() {
 		return true;
+	}
+	
+	@Override
+	public boolean getTraversable() {
+		return false;
 	}
 	
 	@Override

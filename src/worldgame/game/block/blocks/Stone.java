@@ -18,8 +18,14 @@ public class Stone extends Block {
 		return "Stone";
 	}
 
+	@Override
 	public boolean getTransparency() {
 		return true;
+	}
+	
+	@Override
+	public boolean getTraversable() {
+		return false;
 	}
 	
 	@Override

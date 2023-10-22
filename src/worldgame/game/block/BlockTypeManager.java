@@ -3,6 +3,7 @@ package worldgame.game.block;
 import worldgame.game.block.blocks.Air;
 import worldgame.game.block.blocks.Coal;
 import worldgame.game.block.blocks.Leaves;
+import worldgame.game.block.blocks.Stairs;
 import worldgame.game.block.blocks.Stone;
 import worldgame.game.block.blocks.Torch;
 import worldgame.game.block.blocks.Wood;
@@ -14,7 +15,8 @@ public class BlockTypeManager {
 		new Leaves(),
 		new Wood(),
 		new Coal(),
-		new Torch()
+		new Torch(),
+		new Stairs()
 	};
 	
 	public static Block getAir() {

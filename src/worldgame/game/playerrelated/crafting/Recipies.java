@@ -4,6 +4,7 @@ public class Recipies {
 	static String[][][] recipies = {
 			{{"Wood", "Coal", "__"}, {"Torch"}},
 			{{"Leaves", "__", "__"}, {"Wood"}},
+			{{"Wood", "Wood", "Wood"}, {"Stairs"}}
 			};
 	public static String getCraftables(String a, String b, String c) {
 		for(String [][] r : recipies) {

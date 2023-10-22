@@ -20,7 +20,13 @@ public class Wood extends Block {
 		return "Wood";
 	}
 
+	@Override
 	public boolean getTransparency() {
+		return false;
+	}
+	
+	@Override
+	public boolean getTraversable() {
 		return false;
 	}
 	

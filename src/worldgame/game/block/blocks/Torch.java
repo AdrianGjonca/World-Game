@@ -18,7 +18,13 @@ public class Torch extends Block {
 		return "Torch";
 	}
 
+	@Override
 	public boolean getTransparency() {
+		return false;
+	}
+	
+	@Override
+	public boolean getTraversable() {
 		return false;
 	}
 	

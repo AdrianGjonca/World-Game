@@ -120,17 +120,17 @@ public class GameEventController {
 			downArrow.hasBeenReleased = false;
 		}
 		
-		if(e.hasBeenPressed && e.held && e.hasBeenReleased) {
-			stepchange_sound.play();
-			if(world.dimention == 0) {
-				world.dimention = 1;
-			}else if(world.dimention == 1) {
-				world.dimention = 0;
-			}
-			world.dimentionCheck();
-			e.hasBeenPressed = false;
-			e.hasBeenReleased = false;
-		}
+//		if(e.hasBeenPressed && e.held && e.hasBeenReleased) {
+//			stepchange_sound.play();
+//			if(world.dimention == 0) {
+//				world.dimention = 1;
+//			}else if(world.dimention == 1) {
+//				world.dimention = 0;
+//			}
+//			world.dimentionCheck();
+//			e.hasBeenPressed = false;
+//			e.hasBeenReleased = false;
+//		}
 		
 		
 		boolean targeting = false;
@@ -190,6 +190,20 @@ public class GameEventController {
 		boolean canhold = (System.currentTimeMillis() - lastTimePressed) > gap && space.held;
 		if(spacetap || canhold) {
 			if(world.checkGround(world.player_x+targetblockx, world.player_y+targetblocky)) {
+				if(BlockTypeManager.blocks[world.world.grid[world.player_x+targetblockx][world.player_y+targetblocky]]
+						.getName().equals("Stairs")) {
+					stepchange_sound.play();
+					if(world.dimention == 0) {
+						world.dimention = 1;
+					}else if(world.dimention == 1) {
+						world.dimention = 0;
+					}
+					world.dimentionCheck();
+					
+					world.world.grid[world.player_x + targetblockx][world.player_y + targetblocky] = 
+							(char) BlockTypeManager.getBlockChar("Stairs");
+				}
+				
 				world.player_x += targetblockx;
 				world.player_y += targetblocky;
 				////////////////////////
