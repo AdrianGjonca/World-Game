@@ -17,7 +17,11 @@ public class Leaves extends Block {
 	public String getDrop() {
 		return "Leaves";
 	}
-
+	
+	public boolean getTransparency() {
+		return true;
+	}
+	
 	@Override
 	public BufferedImage getTexture(int noise, int dimention, char airspace, float lighting) {
 		BufferedImage out;
@@ -42,6 +46,7 @@ public class Leaves extends Block {
 		}else {
 			out = LeafEdges[8];
 		}
+		//return out;
 		return LightingGrader.graded(out, lighting);
 	}
 	

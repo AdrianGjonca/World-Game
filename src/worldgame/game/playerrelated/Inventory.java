@@ -27,12 +27,12 @@ public class Inventory {
 	public boolean hasSpace(char block) {
 		String name = BlockTypeManager.blocks[(int) block].getDrop();
 		boolean space = false;
-		if(items.size() < 17) {
+		if(items.size() < INVENTORY_SLOTS) {
 			return true;
 		}else {
 			if(name != null) {
 				for(ItemStack i : items) {
-					if(i.type.equals(name) && i.numberOf < 99) {
+					if(i.type.equals(name) && i.numberOf < INVENTORY_STACK) {
 						return true;
 					}
 				}
@@ -47,7 +47,7 @@ public class Inventory {
 		if(name != null) {
 			boolean hasBeenMade = false;
 			for(ItemStack i : items) {
-				if(i.type.equals(name) && i.numberOf < 99) {
+				if(i.type.equals(name) && i.numberOf < INVENTORY_STACK) {
 					i.numberOf++;
 					hasBeenMade = true;
 				}
@@ -57,5 +57,8 @@ public class Inventory {
 			}
 		}
 	}
+	
+	public final int INVENTORY_SLOTS = 17;
+	public final int INVENTORY_STACK = 99;
 	
 }

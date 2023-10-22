@@ -3,6 +3,7 @@ package worldgame.engine;
 import java.awt.event.KeyEvent;
 
 import worldgame.engine.core.IndividualInputObj;
+import worldgame.engine.core.audio.SoundEffect;
 import worldgame.engine.core.threading.GamePortal;
 import worldgame.engine.core.threading.SceneManager;
 import worldgame.game.GameEventController;
@@ -36,6 +37,7 @@ public class Main {
 		while(true) {
 			if(itemsIn.hasBeenPressed && itemsIn.hasBeenReleased && !itemsIn.held) {
 				inInventory = !inInventory;
+				ui_sound.play();
 				
 				if(inInventory) {
 					scene_manager.active_scene = inventscene;
@@ -50,5 +52,6 @@ public class Main {
 		}
 		
 	}
+	static SoundEffect ui_sound = new SoundEffect("/Sound/FX/ui.wav");
 
 }

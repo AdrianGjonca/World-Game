@@ -17,6 +17,10 @@ public class BlockTypeManager {
 		new Torch()
 	};
 	
+	public static Block getAir() {
+		return blocks[0];
+	}
+	
 	public static int getBlockChar(String drop) {
 		int id = 0;
 		for(Block b : blocks) {

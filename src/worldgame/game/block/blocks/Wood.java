@@ -20,6 +20,10 @@ public class Wood extends Block {
 		return "Wood";
 	}
 
+	public boolean getTransparency() {
+		return false;
+	}
+	
 	@Override
 	public BufferedImage getTexture(int noise, int dimention, char airspace, float lighting) {
 		return LightingGrader.graded(Wood, lighting);

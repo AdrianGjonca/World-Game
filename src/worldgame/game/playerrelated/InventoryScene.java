@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 import worldgame.engine.core.IndividualInputObj;
+import worldgame.engine.core.audio.SoundEffect;
 import worldgame.engine.core.threading.GamePortal;
 import worldgame.engine.core.threading.SceneThread;
 import worldgame.engine.resourcecontroll.ResourceLoader;
@@ -69,18 +70,21 @@ public class InventoryScene extends SceneThread {
 			if(up.hasBeenReleased && up.hasBeenPressed && up.held) {
 				switch(state) {
 					case 1:
+						ui_sound.play();
 						a--;
 						if(a < -1) {
 							a = inventory.items.size() - 1;
 						}
 						break;
 					case 2:
+						ui_sound.play();
 						b--;
 						if(b < -1) {
 							b = inventory.items.size() - 1;
 						}
 						break;
 					case 3:
+						ui_sound.play();
 						c--;
 						if(c < -1) {
 							c = inventory.items.size() - 1;
@@ -94,18 +98,21 @@ public class InventoryScene extends SceneThread {
 			if(down.hasBeenReleased && down.hasBeenPressed && down.held) {
 				switch(state) {
 					case 1:
+						ui_sound.play();
 						a++;
 						if(a > inventory.items.size() - 1) {
 							a = -1;
 						}
 						break;
 					case 2:
+						ui_sound.play();
 						b++;
 						if(b > inventory.items.size() - 1) {
 							b = -1;
 						}
 						break;
 					case 3:
+						ui_sound.play();
 						c++;
 						if(c > inventory.items.size() - 1) {
 							c = -1;
@@ -164,8 +171,14 @@ public class InventoryScene extends SceneThread {
 						}
 					}
 					g.drawImage(oimg, 110,64, null);
-					
-					if(canCraft() && enter.hasBeenReleased && enter.hasBeenPressed && enter.held) {
+					/////////////
+					if(canCraft() && !inventory.hasSpace((char)BlockTypeManager.getBlockChar(out))) {
+						g.drawImage(cross, 88, 64, null);
+					}
+					if(canCraft() && enter.hasBeenReleased && enter.hasBeenPressed && enter.held
+							&& inventory.hasSpace((char)BlockTypeManager.getBlockChar(out))) {
+						
+						craft_sound.play();
 						if(a != -1) {
 							inventory.items.get(a).numberOf--;
 							if(inventory.items.get(a).numberOf == 0) {
@@ -196,12 +209,14 @@ public class InventoryScene extends SceneThread {
 		}
 		
 		if(right.hasBeenReleased && right.hasBeenPressed && right.held) {
+			ui_sound.play();
 			state++;
 			if(state > 3) state = 3;
 			right.hasBeenReleased = false;
 			right.hasBeenPressed = false;
 		}
 		if(left.hasBeenReleased && left.hasBeenPressed && left.held) {
+			ui_sound.play();
 			state--;
 			if(state < 0) state = 0;
 			left.hasBeenReleased = false;
@@ -247,7 +262,6 @@ public class InventoryScene extends SceneThread {
 		}
 	}
 	void drawInventory(float deltaTime, Graphics g) {
-		System.out.println("Inv");
 		g.drawImage(inventoryBackground, 0, 0, null);
 		int i = 0;
 		for(ItemStack item : inventory.items) {
@@ -261,8 +275,9 @@ public class InventoryScene extends SceneThread {
 	}
 	
 	void drawCrafting(float deltaTime, Graphics g) {
-		System.out.println("InvC");
 		g.drawImage(inventoryCraftBackground, 0, 0, null);
 	}
-
+	
+	SoundEffect ui_sound = new SoundEffect("/Sound/FX/ui.wav");
+	SoundEffect craft_sound = new SoundEffect("/Sound/FX/craft.wav");
 }

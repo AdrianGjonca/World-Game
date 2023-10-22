@@ -9,7 +9,7 @@ import worldgame.game.rendering.WorldSpace;
 import worldgame.game.rendering.lighting.LightMap;
 
 public class BlockRendering {
-	
+	static BufferedImage bob = BlockTypeManager.blocks[1].getTexture(0, 0, (char) 0, 1f);
 	static int noise;
 	public static void drawBlock(Graphics g, WorldSpace worldspace, World world,LightMap map, int x, int y) {
 		int block_id = world.world.grid[x][y];
@@ -32,11 +32,14 @@ public class BlockRendering {
 			}
 			
 			img = BlockTypeManager.blocks[block_id].getTexture(noise, world.dimention, airspace, map.lightMap[x][y]);
+			//img = BlockTypeManager.blocks[block_id].getTexture(noise, world.dimention, airspace, 1);
 		}else {
 			img = BlockTypeManager.blocks[block_id].getTexture(noise, world.dimention, (char) 0,  1);
 		}
-		
-		
+
+		if(world.world.grid[x][y] != 0) if(BlockTypeManager.blocks[world.world.grid[x][y]].getTransparency()) {
+			worldspace.drawTileScreenspace(g, BlockTypeManager.blocks[0].getTexture(noise, world.dimention, (char) 0, 1f), x, y);
+		}
 		worldspace.drawTileScreenspace(g, img, x, y);
 		
 	}

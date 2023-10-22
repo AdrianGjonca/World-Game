@@ -3,10 +3,12 @@ package worldgame.game;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import worldgame.engine.core.audio.SoundEffect;
 import worldgame.engine.core.threading.GamePortal;
 import worldgame.engine.core.threading.SceneThread;
 import worldgame.engine.resourcecontroll.ResourceLoader;
 import worldgame.game.block.BlockRendering;
+import worldgame.game.block.BlockTypeManager;
 import worldgame.game.playerrelated.ItemStack;
 import worldgame.game.playerrelated.LinkItemNameToIcon;
 import worldgame.game.rendering.ParticleManager;
@@ -65,7 +67,7 @@ public class GameScene extends SceneThread {
 			over_map.process(world.overground);
 			next = System.currentTimeMillis() + 1000;
 		}
-		System.out.println(1f/deltaTime);
+		//System.out.println(1f/deltaTime);
 		controller.update();
 		if(position.camx < world.player_x) position.camx += deltaTime * 2f + (Math.abs(position.camx - world.player_x) * 0.05f);
 		if(position.camx > world.player_x) position.camx -= deltaTime * 2f + (Math.abs(position.camx - world.player_x) * 0.05f);
@@ -74,6 +76,7 @@ public class GameScene extends SceneThread {
 		
 		drawBlocks();
 		position.drawTileScreenspace(g2, playersprite[world.player_facing], world.player_x, world.player_y);
+		//position.drawTileScreenspace(g2, BlockTypeManager.blocks[2].getTexture(0, 0, (char) 0b1111, 1), world.player_x + 0.5f, world.player_y);
 		g2.drawImage(selectedBlockUI, 240 - 16 - 4, 144 - 16 - 4, null);
 		
 		if(controller.inventory.items.size() > 0) {
@@ -137,9 +140,11 @@ public class GameScene extends SceneThread {
 			for(int y = world.player_y - 5; y<world.player_y + 6; y++) {
 				LightMap map = under_map;
 				if(world.dimention == 0) map = over_map;
-				BlockRendering.drawBlock(g2, position, world,map,  x, y);
+				BlockRendering.drawBlock(g2, position, world, map, x, y);
 			}
 		}
 	}
+	
+
 
 }

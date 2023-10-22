@@ -17,6 +17,10 @@ public class Air extends Block {
 	public String getDrop() {
 		return null;
 	}
+	
+	public boolean getTransparency() {
+		return true;
+	}
 
 	@Override
 	public BufferedImage getTexture(int noise, int dimention, char airspace, float lighting) {

@@ -18,11 +18,13 @@ public class Stone extends Block {
 		return "Stone";
 	}
 
+	public boolean getTransparency() {
+		return true;
+	}
+	
 	@Override
 	public BufferedImage getTexture(int noise, int dimention, char airspace, float lighting) {
-		BufferedImage[] StoneEdges = StoneEdgesO;
 		BufferedImage out;
-		if(dimention == 1) StoneEdges = StoneEdgesU;
 		if(airspace == 0b0000) {
 			out =  Stone;
 		}else if(airspace == 0b1000) {
@@ -44,10 +46,10 @@ public class Stone extends Block {
 		}else {
 			out = StoneEdges[8];
 		}
+		//return out;
 		return LightingGrader.graded(out,lighting);
 	}
 
 	public static BufferedImage Stone = ResourceLoader.easyLoad("/Textures/Stone/Stone.png");
-	public static BufferedImage[] StoneEdgesU = ResourceLoader.retrieveTileset(ResourceLoader.easyLoad("/Textures/Stone/StoneEdgesU.png"));
-	public static BufferedImage[] StoneEdgesO = ResourceLoader.retrieveTileset(ResourceLoader.easyLoad("/Textures/Stone/StoneEdgesO.png"));
+	public static BufferedImage[] StoneEdges = ResourceLoader.retrieveTileset(ResourceLoader.easyLoad("/Textures/Stone/StoneEdges.png"));
 }

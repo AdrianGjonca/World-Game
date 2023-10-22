@@ -17,12 +17,14 @@ public class Coal extends Block {
 	public String getDrop() {
 		return "Coal";
 	}
-
+	
+	public boolean getTransparency() {
+		return true;
+	}
+	
 	@Override
 	public BufferedImage getTexture(int noise, int dimention, char airspace, float lighting) {
-		BufferedImage[] CoalEdges = CoalEdgesO;
 		BufferedImage out;
-		if(dimention == 1) CoalEdges = CoalEdgesU;
 		if(airspace == 0b0000) {
 			out =  Coal;
 		}else if(airspace == 0b1000) {
@@ -44,10 +46,10 @@ public class Coal extends Block {
 		}else {
 			out = CoalEdges[8];
 		}
+		//return out;
 		return LightingGrader.graded(out, lighting);
 	}
 
 	public static BufferedImage Coal = ResourceLoader.easyLoad("/Textures/Coal/Coal.png");
-	public static BufferedImage[] CoalEdgesU = ResourceLoader.retrieveTileset(ResourceLoader.easyLoad("/Textures/Coal/CoalEdgesU.png"));
-	public static BufferedImage[] CoalEdgesO = ResourceLoader.retrieveTileset(ResourceLoader.easyLoad("/Textures/Coal/CoalEdgesO.png"));
+	public static BufferedImage[] CoalEdges = ResourceLoader.retrieveTileset(ResourceLoader.easyLoad("/Textures/Coal/CoalEdges.png"));
 }

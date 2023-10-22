@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 
 import worldgame.engine.core.IndividualInputObj;
 import worldgame.engine.core.InputReadyFrame;
+import worldgame.engine.core.audio.SoundEffect;
 import worldgame.game.block.BlockTypeManager;
 import worldgame.game.foliage.FoliageThread;
 import worldgame.game.foliage.FoliageTick;
@@ -84,7 +85,6 @@ public class GameEventController {
 		this.downArrow = downArrow;
 		this.downArrow.hasBeenReleased = true;
 		
-		//returnKey
 		IndividualInputObj returnKey = new IndividualInputObj(KeyEvent.VK_ENTER);
 		frame.listened_to_buttons.add(returnKey);
 		this.returnKey = returnKey;
@@ -121,6 +121,7 @@ public class GameEventController {
 		}
 		
 		if(e.hasBeenPressed && e.held && e.hasBeenReleased) {
+			stepchange_sound.play();
 			if(world.dimention == 0) {
 				world.dimention = 1;
 			}else if(world.dimention == 1) {
@@ -191,6 +192,8 @@ public class GameEventController {
 			if(world.checkGround(world.player_x+targetblockx, world.player_y+targetblocky)) {
 				world.player_x += targetblockx;
 				world.player_y += targetblocky;
+				////////////////////////
+				footstep.play();
 			}else {
 				lastTimeReleased = System.currentTimeMillis();
 			}
@@ -206,6 +209,7 @@ public class GameEventController {
 					int a = BlockTypeManager.getBlockChar(stack.type);
 					if(a > 0) world.world.grid[world.player_x + targetblockx][world.player_y + targetblocky] = (char) a;
 					stack.numberOf --;
+					place_sound.play();
 					if(stack.numberOf <= 0) {
 						inventory.selected--;
 						if(inventory.selected < 0) inventory.selected = 0;
@@ -224,6 +228,7 @@ public class GameEventController {
 	
 	public void destroyBlock(int ax, int ay) {
 		if(world.world.grid[world.player_x + ax][world.player_y + ay] != 0) {
+			break_sound.play();
 			if(inventory.hasSpace(world.world.grid[world.player_x + ax][world.player_y + ay])) {
 				inventory.addBlock(world.world.grid[world.player_x + ax][world.player_y + ay]);
 				scene.particles.particles.add(new DestroyParticle(world.player_x + ax,world.player_y + ay));
@@ -233,4 +238,9 @@ public class GameEventController {
 			}
 		}			
 	}
+	
+	SoundEffect footstep = new SoundEffect("/Sound/FX/footstep.wav");
+	SoundEffect break_sound = new SoundEffect("/Sound/FX/break.wav");
+	SoundEffect place_sound = new SoundEffect("/Sound/FX/place.wav");
+	SoundEffect stepchange_sound = new SoundEffect("/Sound/FX/step-change.wav");
 }

@@ -6,8 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public class LightingGrader {
-	static BufferedImage buffer = new BufferedImage(1024, 1024, BufferedImage.TYPE_INT_RGB);
-	static Graphics2D g = null;
 
 	public static BufferedImage graded(BufferedImage in, float grade) {
 		/*
@@ -24,11 +22,13 @@ public class LightingGrader {
 
 		//This method is chosen as it seems to be better performance wise.
 		//I'd imagine it's utilising the GPU.
+		
+		
 		float gradeProper = (float) Math.sqrt(grade);
 
-		if (g == null)
-			g = buffer.createGraphics();
-		g.setBackground(new Color(0, 0, 0, 0));
+		BufferedImage buffer = new BufferedImage(in.getWidth(), in.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = buffer.createGraphics();
+		
 		g.drawImage(in, 0, 0, null);
 		g.setColor(new Color(0, 0, 0, (int) (255f * (1f - grade))));
 		g.fillRect(0, 0, in.getWidth(), in.getHeight());

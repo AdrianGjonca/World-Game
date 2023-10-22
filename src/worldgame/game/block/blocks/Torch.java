@@ -18,6 +18,10 @@ public class Torch extends Block {
 		return "Torch";
 	}
 
+	public boolean getTransparency() {
+		return false;
+	}
+	
 	@Override
 	public BufferedImage getTexture(int noise, int dimention, char airspace, float lighting) {
 		return LightingGrader.graded(Torch, lighting);
