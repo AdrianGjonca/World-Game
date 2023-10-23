@@ -25,8 +25,8 @@ public class LinkItemNameToIcon {
 		}
 		return after;
 	}
-	public static BufferedImage leaves = mini("/Textures/Leaves.png");
-	public static BufferedImage stone = mini("/Textures/Stone.png");
+	public static BufferedImage leaves = mini("/Textures/Leaves/Leaves.png");
+	public static BufferedImage stone = mini("/Textures/Stone/Stone.png");
 	public static BufferedImage wood = mini("/Textures/Wood.png");
 	public static BufferedImage coal = mini("/Textures/Coal/Coal.png");
 	public static BufferedImage torch = mini("/Textures/Torch/Torch.png");
