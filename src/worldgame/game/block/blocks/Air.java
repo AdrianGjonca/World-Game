@@ -29,7 +29,7 @@ public class Air extends Block {
 	}
 	
 	@Override
-	public BufferedImage getTexture(int noise, int dimention, char airspace, float lighting) {
+	public BufferedImage getTexture(int noise, int dimention, char airspace, char otherspace, float lighting) {
 		noise = noise >> 5;
 		switch (dimention) {
 			case 0:

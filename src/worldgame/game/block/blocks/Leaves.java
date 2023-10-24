@@ -31,9 +31,10 @@ public class Leaves extends Block {
 	}
 	
 	@Override
-	public BufferedImage getTexture(int noise, int dimention, char airspace, float lighting) {
+	public BufferedImage getTexture(int noise, int dimention, char airspace, char otherspace, float lighting) {
 		BufferedImage out;
-		if(airspace == 0b0000) {
+		char compound = (char) (airspace | otherspace);
+		if(compound == 0b0000) {
 			out = Leaves;
 		}else {
 			out = BlockRendering.tileMask(Leaves, LeafMask, airspace);

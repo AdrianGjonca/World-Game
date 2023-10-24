@@ -10,7 +10,7 @@ import worldgame.game.rendering.WorldSpace;
 import worldgame.game.rendering.lighting.LightMap;
 
 public class BlockRendering {
-	static BufferedImage bob = BlockTypeManager.blocks[1].getTexture(0, 0, (char) 0, 1f);
+	static BufferedImage bob = BlockTypeManager.blocks[1].getTexture(0, 0, (char) 0, (char) 0, 1f);
 	static int noise;
 	public static void drawBlock(Graphics g, WorldSpace worldspace, World world,LightMap map, int x, int y) {
 		int block_id = world.world.grid[x][y];
@@ -19,39 +19,39 @@ public class BlockRendering {
 		BufferedImage img = null;
 		if(x > 0 && y > 0 && x < world.world.grid.length && y < world.world.grid[0].length) {
 			char airspace = 0b0000;
-			if(world.world.grid[x-1][y+1] == 0) {
-				airspace += 0b10000000;
-			}
-			if(world.world.grid[x+1][y+1] == 0) {
-				airspace += 0b01000000;
-			}
-			if(world.world.grid[x+1][y-1] == 0) {
-				airspace += 0b00100000;
-			}
-			if(world.world.grid[x-1][y-1] == 0) {
-				airspace += 0b00010000;
-			}
-			if(world.world.grid[x][y+1] == 0) {
-				airspace += 0b00001000;
-			}
-			if(world.world.grid[x+1][y] == 0) {
-				airspace += 0b00000100;
-			}
-			if(world.world.grid[x][y-1] == 0) {
-				airspace += 0b00000010;
-			}
-			if(world.world.grid[x-1][y] == 0) {
-				airspace += 0b00000001;
-			}
+			char otherspace = 0b0000;
+			if(world.world.grid[x-1][y+1] == 0) airspace += 0b10000000;
+			else if(world.world.grid[x-1][y+1] != block_id) otherspace += 0b10000000;
 			
-			img = BlockTypeManager.blocks[block_id].getTexture(noise, world.dimention, airspace, map.lightMap[x][y]);
+			if(world.world.grid[x+1][y+1] == 0) airspace += 0b01000000;
+			else if(world.world.grid[x+1][y+1] != block_id) otherspace += 0b01000000;
+			
+			if(world.world.grid[x+1][y-1] == 0) airspace += 0b00100000;
+			else if(world.world.grid[x+1][y-1] != block_id) otherspace += 0b00100000;
+			
+			if(world.world.grid[x-1][y-1] == 0) airspace += 0b00010000;
+			else if(world.world.grid[x-1][y-1] != block_id) otherspace += 0b00010000;
+			
+			if(world.world.grid[x][y+1] == 0) airspace += 0b00001000;
+			else if(world.world.grid[x][y+1] != block_id) otherspace += 0b00001000;
+			
+			if(world.world.grid[x+1][y] == 0) airspace += 0b00000100;
+			else if(world.world.grid[x+1][y] != block_id) otherspace += 0b00000100;
+			
+			if(world.world.grid[x][y-1] == 0) airspace += 0b00000010;
+			else if(world.world.grid[x][y-1] != block_id) otherspace += 0b00000010;
+			
+			if(world.world.grid[x-1][y] == 0) airspace += 0b00000001;
+			else if(world.world.grid[x-1][y] != block_id) otherspace += 0b00000001;
+			
+			img = BlockTypeManager.blocks[block_id].getTexture(noise, world.dimention, airspace,otherspace, map.lightMap[x][y]);
 			//img = BlockTypeManager.blocks[block_id].getTexture(noise, world.dimention, airspace, 1);
 		}else {
-			img = BlockTypeManager.blocks[block_id].getTexture(noise, world.dimention, (char) 0,  1);
+			img = BlockTypeManager.blocks[block_id].getTexture(noise, world.dimention, (char) 0,(char) 0,  1);
 		}
 
 		if(world.world.grid[x][y] != 0) if(BlockTypeManager.blocks[world.world.grid[x][y]].getTransparency()) {
-			worldspace.drawTileScreenspace(g, BlockTypeManager.blocks[0].getTexture(noise, world.dimention, (char) 0, 1f), x, y);
+			worldspace.drawTileScreenspace(g, BlockTypeManager.blocks[0].getTexture(noise, world.dimention, (char) 0, (char) 0, 1f), x, y);
 		}
 		worldspace.drawTileScreenspace(g, img, x, y);
 	}

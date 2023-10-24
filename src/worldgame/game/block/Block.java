@@ -7,5 +7,5 @@ public abstract class Block{
 	public abstract String getDrop();
 	public abstract boolean getTransparency();
 	public abstract boolean getTraversable();
-	public abstract BufferedImage getTexture(int noise, int dimention, char airspace, float lighting);
+	public abstract BufferedImage getTexture(int noise, int dimention, char airspace, char otherspace, float lighting);
 }

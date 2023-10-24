@@ -13,6 +13,7 @@ public class GenWorld {
 		populate(world.overground, (char)0);
 		populate(world.underground, (char)0);
 		populateMini(world.underground, (char)BlockTypeManager.getBlockChar("Coal"));
+		populateMini(world.overground, (char)BlockTypeManager.getBlockChar("Water"));
 	}
 	
 	public static void fillwith(LevelGrid grid, char block) {

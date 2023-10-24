@@ -156,7 +156,7 @@ public class InventoryScene extends SceneThread {
 				
 				String out = Recipies.getCraftables(aitem, bitem, citem);
 				if(!out.equals("__")) {
-					BufferedImage oimg = BlockTypeManager.blocks[BlockTypeManager.getBlockChar(out)].getTexture(0, 0, (char)0, 1);
+					BufferedImage oimg = BlockTypeManager.blocks[BlockTypeManager.getBlockChar(out)].getTexture(0, 0, (char)0, (char) 0, 1);
 					if(inventory.contains(out)) {
 						ItemStack item = null;
 						for(ItemStack possible : inventory.items) {
@@ -254,7 +254,7 @@ public class InventoryScene extends SceneThread {
 	
 	void __CraftUIIndividualIcon(Graphics g, int a, int off) {
 		String atype = inventory.items.get(a).type;
-		BufferedImage aimg = BlockTypeManager.blocks[BlockTypeManager.getBlockChar(atype)].getTexture(0, 0, (char)0, 1);
+		BufferedImage aimg = BlockTypeManager.blocks[BlockTypeManager.getBlockChar(atype)].getTexture(0, 0, (char)0, (char) 0, 1);
 		g.drawImage(aimg, 19 + off,64, null);
 		String aText = inventory.items.get(a).numberOf + "";
 		for(int x = 0; x < aText.length(); x++) {

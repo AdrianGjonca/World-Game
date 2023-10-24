@@ -29,7 +29,7 @@ public class Torch extends Block {
 	}
 	
 	@Override
-	public BufferedImage getTexture(int noise, int dimention, char airspace, float lighting) {
+	public BufferedImage getTexture(int noise, int dimention, char airspace, char otherspace, float lighting) {
 		switch((int)(((System.currentTimeMillis()+noise)/200) % 4)) {
 		case 0:
 			return LightingGrader.graded(Torch1, lighting);

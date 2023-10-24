@@ -31,7 +31,7 @@ public class Wood extends Block {
 	}
 	
 	@Override
-	public BufferedImage getTexture(int noise, int dimention, char airspace, float lighting) {
+	public BufferedImage getTexture(int noise, int dimention, char airspace, char otherspace, float lighting) {
 		return LightingGrader.graded(Wood, lighting);
 	}
 

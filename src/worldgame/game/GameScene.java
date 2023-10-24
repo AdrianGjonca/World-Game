@@ -67,7 +67,7 @@ public class GameScene extends SceneThread {
 			over_map.process(world.overground);
 			next = System.currentTimeMillis() + 1000;
 		}
-		System.out.println(1f/deltaTime);
+		//System.out.println(1f/deltaTime);
 		controller.update();
 		if(position.camx < world.player_x) position.camx += deltaTime * 2f + (Math.abs(position.camx - world.player_x) * 0.05f);
 		if(position.camx > world.player_x) position.camx -= deltaTime * 2f + (Math.abs(position.camx - world.player_x) * 0.05f);

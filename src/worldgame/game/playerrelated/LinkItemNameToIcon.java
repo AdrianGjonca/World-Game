@@ -32,7 +32,7 @@ public class LinkItemNameToIcon {
 	public static BufferedImage torch = mini("/Textures/Torch/Torch.png");
 	
 	public static BufferedImage icon(String name) {
-		return mini(BlockTypeManager.blocks[BlockTypeManager.getBlockChar(name)].getTexture(0, 0, (char) 0, 1f));
+		return mini(BlockTypeManager.blocks[BlockTypeManager.getBlockChar(name)].getTexture(0, 0, (char) 0, (char) 0, 1f));
 	}
 	
 	

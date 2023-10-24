@@ -6,6 +6,7 @@ import worldgame.game.block.blocks.Leaves;
 import worldgame.game.block.blocks.Stairs;
 import worldgame.game.block.blocks.Stone;
 import worldgame.game.block.blocks.Torch;
+import worldgame.game.block.blocks.Water;
 import worldgame.game.block.blocks.Wood;
 
 public class BlockTypeManager {
@@ -16,7 +17,8 @@ public class BlockTypeManager {
 		new Wood(),
 		new Coal(),
 		new Torch(),
-		new Stairs()
+		new Stairs(),
+		new Water()
 	};
 	
 	public static Block getAir() {
